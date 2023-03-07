@@ -1,0 +1,23 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.nav_rightside, .nav_leftside {
+  display: flex;
+  border: 1px solid;
+  gap: 36px;
+}
+.navpp {
+  border-radius: 50%;
+  background-color: antiquewhite;
+  width: 55px;
+}
+.navpp:hover {
+  cursor: pointer;
+}
+.dropdown_ul {
+  position: absolute;
+  border: 1px solid #9a9af9;
+  right: 20px;
+}
