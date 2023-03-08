@@ -25,7 +25,8 @@ function App() {
   })
   // beta.reactjs.org: "useRef is a React Hook that lets you reference a value that’s not needed for rendering."
   const memory1 = useRef({
-    loginfail: ''
+    loginfail: '',
+    componentForPopup: null,
   })
   // const [popuparray, setPopuparray] = useState([])
   // const [loginState, setLoginState] = useState({[userLoginStates_objkeys.init]: true})
@@ -180,11 +181,11 @@ function App() {
       }
     }
     async function loggingout() {
-      console.log('logging out function running')
       // add_popup({ [popuparray_keys.children]: 'Loging out...' })
       const logoutresult = await myfetch({method: 'GET', route: '/protected/logout'})
       // close_current_popup()
       localStorage.removeItem('usertoken')
+      // dispatch and navigate each cause one extra re-render, not in order i would expect
       dispatch({action: dispatchActions.loginrelated.logged_out})
       navigate('/')
     }
@@ -198,7 +199,7 @@ function App() {
       popuparray_func: [add_popup, close_current_popup],
       // popuparray: [popuparray, setPopuparray],
       // loginstate: [loginState, setLoginState],
-      mainreducer: [state, dispatch]
+      mainreducer: [state, dispatch],
     }}>
       <div className="App">
         <Popup />

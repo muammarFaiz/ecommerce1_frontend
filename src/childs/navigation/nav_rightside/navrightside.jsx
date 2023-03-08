@@ -38,7 +38,6 @@ export default function Navrightside({showNav, userinfo, dispatch}) {
     resized_img, setResized_img, dropdownon, setDropdownon, userinfo: userinfo
   }
 
-  console.log(showNav)
   if (showNav === reducerState_posibleValues.showNav.loggedin ||
     showNav === reducerState_posibleValues.showNav.changepp) {
     return (

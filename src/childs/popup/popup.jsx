@@ -22,9 +22,10 @@ function Notif(props) {
 
 export default function Popup(props) {
   const maincontext = useContext(appContext)
+  const memory1 = maincontext[appcontext_keys.memory1]
   const [state, dispatch] = maincontext[appcontext_keys.mainreducer]
   // const [popuparr_state, popuparr_set] = maincontext.popuparray
-
+  const componentForPopup = memory1[appcontext_keys.memory1_current_keys.componentForPopup]
   if (state[reducerState_keys.popuparr].length < 1) return null
   const data = state[reducerState_keys.popuparr][0]
 
@@ -35,7 +36,7 @@ export default function Popup(props) {
   return (
     <div className="popup_bg">
       <div className="popup_container">
-        {data.notif ? <Notif {...data} /> : data.children}
+        {data.notif ? <Notif {...data} /> : data === 'custom' ? componentForPopup : data.children}
       </div>
     </div>
   )

@@ -15,7 +15,8 @@ export const index_popupstate = {popuparray: 0, setPopuparray: 1}
 export const appcontext_keys = {
   memory1: 'memory1',
   memory1_current_keys: {
-    loginCredentials: 'loginCredentials',
+    loginfail: 'loginfail',
+    componentForPopup: 'componentForPopup',
   },
   loginCredentials_keys: {
     username: 'username',

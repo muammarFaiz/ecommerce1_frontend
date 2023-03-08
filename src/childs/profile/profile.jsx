@@ -30,7 +30,6 @@ export default function UserProfile(props) {
   // const [loginstate, setloginstate] = appcontext.loginstate
   const [state, dispatch] = appcontext[appcontext_keys.mainreducer]
   // const [display, setDisplay] = appcontext.display
-  
   const [add_popup, close_current_popup] = appcontext[appcontext_keys.popuparray_func]
 
 
@@ -172,9 +171,10 @@ export default function UserProfile(props) {
     //     <span>{loadingfail_desc.current.savedesc}</span>
     //   </>
     // )
+    memory1[appcontext_keys.memory1_current_keys.componentForPopup] = <DescTextarea />
     dispatch({
       action: dispatchActions.profileuserdesc_popup,
-      value: <DescTextarea />,
+      value: 'custom'
     })
     // add_popup({[popuparray_keys.children]: <DescTextarea />})
   }
