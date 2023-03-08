@@ -20,7 +20,7 @@ export default function reducer(state, input) {
       // if loginstate not init and not initfail:
       if(key !== dispatchActions.loginrelated.init && key !== dispatchActions.loginrelated.initfail) {
         // if loginstate logged in: show navigation "loggedin"
-        if(key === dispatchActions.loginrelated.logged_in) {
+        if(key === dispatchActions.loginrelated.logged_in || key === dispatchActions.loginrelated.logging_out) {
           toreturn[reducerState_keys.showNav] = reducerState_posibleValues.showNav.loggedin
         } else {
           // else mean user logged out
@@ -34,13 +34,17 @@ export default function reducer(state, input) {
       return false
     } else return true
   })
+
+
+  function showpopup() {toreturn[reducerState_keys.popuparr].push(input.value)}
+  function close_current_popup() {toreturn[reducerState_keys.popuparr].shift()}
   switch (input.action) {
     case dispatchActions.loginrelated.init:
       // popuparr is not needed because its already in the initial value of reducer state
       break;
     case dispatchActions.loginrelated.initfail:
     case dispatchActions.loginrelated.initerr:
-      toreturn[reducerState_keys.popuparr].push(input.value)
+      showpopup()
       break;
     case dispatchActions.loginrelated.logging_in:
       toreturn[reducerState_keys.logininputvalues] = input.value
@@ -50,14 +54,14 @@ export default function reducer(state, input) {
         toreturn[reducerState_keys.loginFailInfo] = input.value
         break;
     case dispatchActions.loginrelated.logged_in:
-      toreturn[reducerState_keys.popuparr].shift()
+      close_current_popup()
       toreturn[reducerState_keys.userdata] = input.value
       break;
     case dispatchActions.loginrelated.logging_out:
-      toreturn[reducerState_keys.popuparr].push(input.value)
+      showpopup()
       break;
     case dispatchActions.loginrelated.logged_out:
-      toreturn[reducerState_keys.popuparr].shift()
+      close_current_popup()
       break;
 
     case dispatchActions.changeUserImage:
@@ -69,11 +73,11 @@ export default function reducer(state, input) {
       toreturn[reducerState_keys.userdata][reducerState_keys.userdata_keys.userdesc] = input.value
       break;
     case dispatchActions.close_current_popup:
-      toreturn[reducerState_keys.popuparr].shift()
+      close_current_popup()
       break;
     case dispatchActions.profilefailupdateimage_popup:
     case dispatchActions.profileuserdesc_popup:
-      toreturn[reducerState_keys.popuparr].push(input.value)
+      showpopup()
       break;
   
     default:
